@@ -20,7 +20,8 @@ class INVENTORY_API AInv_PlayerController : public APlayerController
 	GENERATED_BODY()
 public:
 	AInv_PlayerController();
-
+	virtual void Tick(float DeltaTime) override;
+	
 protected:
 	virtual void BeginPlay() override;
 
@@ -28,6 +29,8 @@ protected:
 private:
 	void PrimaryInteract();
 	void CreateHUDWidget();
+	void TraceForItem();
+	
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
 	TArray<TObjectPtr<UInputMappingContext>> DefaultIMCs;
@@ -40,4 +43,13 @@ private:
 
 	UPROPERTY()
 	TObjectPtr<UInv_HUDWidget> HUDWidget;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
+	double TraceLength;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
+	TEnumAsByte<ECollisionChannel> ItemTraceChannel;//自定义检测通道，这里必须用 TEnumAsByte ，不然无法使用 UPROPERTY
+
+	TWeakObjectPtr<AActor> LastActor;
+	TWeakObjectPtr<AActor> ThisActor;
 };
