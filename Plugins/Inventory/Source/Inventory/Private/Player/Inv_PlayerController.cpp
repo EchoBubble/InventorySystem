@@ -7,6 +7,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "Inventory.h"
 #include "Blueprint/UserWidget.h"
+#include "Items/Components/Inv_ItemComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Widgets/HUD/Inv_HUDWidget.h"
 
@@ -71,20 +72,30 @@ void AInv_PlayerController::TraceForItem()
 
 	FVector TraceStart;
 	FVector Forward;
+	//屏幕中心点转化为世界位置和方向
 	if (!UGameplayStatics::DeprojectScreenToWorld(this, ViewportCenter, TraceStart, Forward)) return;
 
 	const FVector TraceEnd = TraceStart + Forward * TraceLength;
 	FHitResult HitResult;
 	GetWorld()->LineTraceSingleByChannel(HitResult, TraceStart, TraceEnd, ItemTraceChannel);
 
-	LastActor =ThisActor;
+	LastActor = ThisActor;
 	ThisActor = HitResult.GetActor();
 
+	if (!ThisActor.IsValid())
+	{
+		if (IsValid(HUDWidget))HUDWidget->HidePickupMessage();
+	}
+	
 	if (ThisActor == LastActor) return;
 
 	if (ThisActor.IsValid())
 	{
-		UE_LOG(LogInventory, Warning, TEXT("Started tracing a new actor."))
+		UInv_ItemComponent* ItemComponent = ThisActor->FindComponentByClass<UInv_ItemComponent>();
+		if (!IsValid(ItemComponent)) return;
+
+		if (IsValid(HUDWidget)) HUDWidget->ShowPickupMessage(ItemComponent->GetPickupMessage());
+		
 	}
 	if (LastActor.IsValid())
 	{
