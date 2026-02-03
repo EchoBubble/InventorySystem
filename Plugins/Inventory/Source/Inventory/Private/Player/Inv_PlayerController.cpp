@@ -12,7 +12,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Widgets/HUD/Inv_HUDWidget.h"
 
-AInv_PlayerController::AInv_PlayerController()
+AInv_PlayerController::AInv_PlayerController(): ItemTraceChannel()
 {
 	PrimaryActorTick.bCanEverTick = true;
 	TraceLength = 500.0;
