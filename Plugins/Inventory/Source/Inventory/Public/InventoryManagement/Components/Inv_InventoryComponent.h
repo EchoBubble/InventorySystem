@@ -18,6 +18,7 @@ public:
 
 	UInv_InventoryComponent();
 
+	void ToggleInventoryMenu();//切换背包状态，该函数由 PC 进行调用
 protected:
 
 	virtual void BeginPlay() override;
@@ -34,5 +35,7 @@ private:
 	UPROPERTY(EditAnywhere, Category="Inventory")
 	TSubclassOf<UInv_InventoryBase> InventoryMenuClass;
 	
-	
+	bool bInventoryMenuOpen;//决定是否打开背包页面
+	void OpenInventoryMenu();
+	void CloseInventoryMenu();
 };
