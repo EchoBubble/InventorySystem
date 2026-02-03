@@ -45,7 +45,7 @@ void AInv_PlayerController::BeginPlay()
 		}
 	}
 
-	InventoryComponent = FindComponentByClass<UInv_InventoryComponent>();
+	InventoryComponent = FindComponentByClass<UInv_InventoryComponent>();//即便是蓝图创建，也能通过该命令查找
 	
 	CreateHUDWidget();
 }

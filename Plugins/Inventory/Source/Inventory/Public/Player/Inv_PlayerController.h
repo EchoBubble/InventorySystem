@@ -23,7 +23,7 @@ public:
 	AInv_PlayerController();
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION(BlueprintCallable, Category="Inventory")
 	void ToggleInventory();
 protected:
 	virtual void BeginPlay() override;
@@ -34,7 +34,7 @@ private:
 	void CreateHUDWidget();
 	void TraceForItem();
 
-	TWeakObjectPtr<UInv_InventoryComponent> InventoryComponent;
+	TWeakObjectPtr<UInv_InventoryComponent> InventoryComponent;//对蓝图组件的弱引用
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
 	TArray<TObjectPtr<UInputMappingContext>> DefaultIMCs;
