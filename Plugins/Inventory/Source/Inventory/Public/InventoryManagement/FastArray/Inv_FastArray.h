@@ -37,7 +37,7 @@ public:
 	FInv_InventoryFastArray(){};
 	FInv_InventoryFastArray(UActorComponent* InOwnerComponent) : OwnerComponent(InOwnerComponent){};
 
-	TArray<FInv_InventoryEntry> GetAllItems() const;
+	TArray<UInv_InventoryItem*> GetAllItems() const;
 
 	// FFastArraySerializer contract ,处理网络时，有这两个函数会自动调用
 	void PreReplicatedRemove(const TArrayView<int32> RemovedIndices, int32 FinalSize);

@@ -7,7 +7,7 @@
 #include "Inv_InventoryItem.generated.h"
 
 /**
- * 
+ *  具体的数据
  */
 UCLASS()
 class INVENTORY_API UInv_InventoryItem : public UObject

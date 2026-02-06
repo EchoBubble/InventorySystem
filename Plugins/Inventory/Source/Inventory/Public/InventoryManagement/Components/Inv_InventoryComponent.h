@@ -9,6 +9,8 @@
 
 class UInv_InventoryBase;
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FInventoryItemChange, UInv_InventoryItem*, Item);
+
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent), Blueprintable)
 class INVENTORY_API UInv_InventoryComponent : public UActorComponent
 {
@@ -19,6 +21,9 @@ public:
 	UInv_InventoryComponent();
 
 	void ToggleInventoryMenu();//切换背包状态，该函数由 PC 进行调用
+
+	FInventoryItemChange OnItemAdded;
+	FInventoryItemChange OnItemRemoved;
 protected:
 
 	virtual void BeginPlay() override;
