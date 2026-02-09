@@ -20,6 +20,8 @@ class INVENTORY_API UInv_SpatialInventory : public UInv_InventoryBase
 public:
 
 	virtual void NativeOnInitialized() override;
+
+	virtual FInv_SlotAvailabilityResult HasRoomForItem(UInv_ItemComponent* ItemComponent) const override;
 private:
 
 	/* BindWidget 蓝图上创建，且命名必须一致*/
