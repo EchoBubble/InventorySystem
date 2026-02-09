@@ -7,7 +7,12 @@
 UInv_InventoryComponent::UInv_InventoryComponent()
 {
 	PrimaryComponentTick.bCanEverTick = false;
-	bInventoryMenuOpen = false;
+	bInventoryMenuOpen = false;//这里只是构造函数需要一个初始化
+}
+
+void UInv_InventoryComponent::TryAddItem(UInv_ItemComponent* ItemComponent)
+{
+	OnNoRoomInInventory.Broadcast();
 }
 
 void UInv_InventoryComponent::ToggleInventoryMenu()

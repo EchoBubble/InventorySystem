@@ -47,10 +47,10 @@ UInv_InventoryItem* FInv_InventoryFastArray::AddEntry(UInv_ItemComponent* ItemCo
 UInv_InventoryItem* FInv_InventoryFastArray::AddEntry(UInv_InventoryItem* Item)
 {
 	check(OwnerComponent)
-	const AActor* OwningActor = OwnerComponent->GetOwner();
+	const AActor* OwningActor = OwnerComponent->GetOwner();//这里最终获取的就是 PC
 	check(OwningActor && OwningActor->HasAuthority());
 
-	FInv_InventoryEntry& NewEntry = Entries.AddDefaulted_GetRef();
+	FInv_InventoryEntry& NewEntry = Entries.AddDefaulted_GetRef();//在数组末尾追加一个新的元素并返回
 	NewEntry.Item = Item;
 
 	MarkItemDirty(NewEntry);
@@ -61,7 +61,7 @@ void FInv_InventoryFastArray::RemoveEntry(UInv_InventoryItem* Item)
 {
 	for (auto EntryIt = Entries.CreateIterator(); EntryIt; ++EntryIt)
 	{
-		FInv_InventoryEntry& Entry = *EntryIt;
+		FInv_InventoryEntry& Entry = *EntryIt;//取出元素
 		if (Entry.Item == Item)
 		{
 			EntryIt.RemoveCurrent();
