@@ -53,7 +53,7 @@ void AInv_PlayerController::BeginPlay()
 void AInv_PlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
-
+	
 	UEnhancedInputComponent* EIC = CastChecked<UEnhancedInputComponent>(InputComponent);
 	EIC->BindAction(PrimaryInteractAction, ETriggerEvent::Started, this, &AInv_PlayerController::PrimaryInteract);
 	EIC->BindAction(ToggleInventoryAction, ETriggerEvent::Started, this, &AInv_PlayerController::ToggleInventory);
