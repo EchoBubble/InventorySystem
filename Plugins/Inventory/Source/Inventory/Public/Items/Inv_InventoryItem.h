@@ -19,8 +19,13 @@ class INVENTORY_API UInv_InventoryItem : public UObject
 public:
 	
 	virtual void GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const override;
+	// 必须：让这个UObject允许走网络复制（作为 Replicated Subobject）。
+	// 不加的话：Dedicated/远端客户端收不到这个 InventoryItem 的数据/字段。
+	virtual bool IsSupportedForNetworking() const override { return true;};
 
 	void SetItemManifest(const FInv_ItemManifest& Manifest);
+	const FInv_ItemManifest& GetItemManifest() const { return ItemManifest.Get<FInv_ItemManifest>(); }//只读
+	FInv_ItemManifest& GetItemManifestMutable() { return ItemManifest.GetMutable<FInv_ItemManifest>(); }//可改
 
 private:
 

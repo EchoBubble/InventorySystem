@@ -35,7 +35,7 @@ void FInv_InventoryFastArray::PostReplicatedAdd(const TArrayView<int32> AddedInd
 
 	for (int32 Index : AddedIndices)
 	{
-		IC->OnItemAdded.Broadcast(Entries[Index].Item);
+		IC->OnItemAdded.Broadcast(Entries[Index].Item);//广播新增的 InventoryItem 
 	}
 }
 
@@ -50,7 +50,7 @@ UInv_InventoryItem* FInv_InventoryFastArray::AddEntry(UInv_ItemComponent* ItemCo
 	FInv_InventoryEntry& NewEntry = Entries.AddDefaulted_GetRef();
 	NewEntry.Item = ItemComponent->GetItemManifest().Manifest(OwningActor);
 
-	IC->AddRepSubObj(NewEntry.Item);
+	IC->AddRepSubObj(NewEntry.Item);//先确保该组件被注册为 可复制子对象，然后才可以被快速数组同步出去
 	MarkItemDirty(NewEntry);
 
 	return NewEntry.Item;

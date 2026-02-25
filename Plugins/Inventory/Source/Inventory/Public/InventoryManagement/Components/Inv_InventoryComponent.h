@@ -34,7 +34,7 @@ public:
 	void Server_AddStacksToItem(UInv_ItemComponent* ItemComponent, int32 StackCount, int32 Remainder);
 	
 	void ToggleInventoryMenu();//切换背包状态，该函数由 PC 进行调用
-	void AddRepSubObj(UObject* SubObj);//
+	void AddRepSubObj(UObject* SubObj);//快速数组储存的是 InventoryItem 指针，它是一个 UObject 指针，只是靠快速数组同步还不够，要先注册到复制通道中
 
 	FInventoryItemChange OnItemAdded;
 	FInventoryItemChange OnItemRemoved;

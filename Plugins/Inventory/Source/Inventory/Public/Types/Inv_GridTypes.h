@@ -39,9 +39,9 @@ struct FInv_SlotAvailabilityResult
 
 	TWeakPtr<UInv_InventoryItem> Item;
 
-	int32 TotalRoomToFill{0};//当前物品总共能塞多少
+	int32 TotalRoomToFill{0};//针对当前这个物品，背包此时最多能接受的数量
 
-	int32 Remainder{0};//剩余的空间
+	int32 Remainder{0};//没能放进背包的“剩余物品数量”
 
 	bool bStackable{false};//是否可堆叠
 
